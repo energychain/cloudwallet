@@ -39,12 +39,9 @@ const cloudwallet = function(rapidAPIkey,keypair,identifier) {
     const settings = {
           "method":"POST",
           "url":baseURL+"cloudwallet",
-          "headers":headers,
-          "params":{
-            "did":jwt
-          }
+          "headers":headers
     };
-    const responds = await axios.post(baseURL+"cloudwallet",settings.params,settings);
+    const responds = await axios.post(baseURL+"cloudwallet",{"did":jwt},settings);
     for (const [key, value] of Object.entries(responds.data)) {
       parent[key] = value;
     }
