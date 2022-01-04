@@ -1,0 +1,31 @@
+{
+  "name": "cloudwallet",
+  "version": "0.5.1",
+  "description": "Cloudwallet Implementation",
+  "main": "lib.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/energychain/cloudwallet.git"
+  },
+  "keywords": [
+    "cloudwallet",
+    "ethereum",
+    "rapidapi"
+  ],
+  "author": "STROMDAO GmbH <dev@stromdao.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/energychain/cloudwallet/issues"
+  },
+  "homepage": "https://github.com/energychain/cloudwallet#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "ethr-did": "^2.1.5"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.3"
+  }
+}
