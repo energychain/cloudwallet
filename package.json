@@ -1,6 +1,6 @@
 {
   "name": "cloudwallet",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Cloudwallet Implementation",
   "main": "lib.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/energychain/cloudwallet#readme",
   "dependencies": {
     "axios": "^0.24.0",
+    "ethers": "^5.5.2",
     "ethr-did": "^2.1.5"
   },
   "devDependencies": {

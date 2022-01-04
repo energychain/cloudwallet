@@ -2,21 +2,24 @@
 
 const axios = require("axios");
 const EthrDID = require("ethr-did").EthrDID;
+const ethers = require("ethers");
 
-const cloudwallet = function(rapidAPIkey,keypair,identifier) {
+const cloudwallet = function(rapidAPIkey,privateKey) {
 
   let baseURL = 'https://cloudwallet.p.rapidapi.com/';
 
   let parent = this;
 
-  if((typeof keypair == 'undefined')||(keypair == null)) {
-    keypair = EthrDID.createKeyPair();
-    keypair.id = "did:ethr:"+keypair.identifier;
+  if((typeof privateKey == 'undefined')||(privateKey == null)) {
+    privateKey = EthrDID.createKeyPair();
+    privateKey.id = "did:ethr:"+privateKey.identifier;
   }
-  if(typeof keypair == 'string') {
-    keypair = {
-      privateKey:keypair,
-      identifier:identifier
+
+  if(typeof privateKey == 'string') {
+    const wallet = new ethers.Wallet(privateKey);
+    privateKey = {
+      privateKey:privateKey,
+      identifier:wallet.address
     }
   }
   const headers = {
@@ -27,13 +30,14 @@ const cloudwallet = function(rapidAPIkey,keypair,identifier) {
   };
 
   const _call = async function() {
+
     const ethrDid = new EthrDID({
-      identifier:keypair.identifier,
+      identifier:privateKey.identifier,
       rpcUrl:"https://integration.corrently.io/",
       name: "mainnet",
       chainId: "6226",
       registry:"0xda77BEeb5002e10be2F5B63E81Ce8cA8286D4335",
-      privateKey:keypair.privateKey
+      privateKey:privateKey.privateKey
      });
     const jwt = await ethrDid.signJWT(parent);
     const settings = {
@@ -58,8 +62,8 @@ const cloudwallet = function(rapidAPIkey,keypair,identifier) {
       await _call();
   }
 
-  this.getKeypair = function() {
-    return keypair;
+  this.getKeys = function() {
+    return privateKey;
   }
 
   _call();
