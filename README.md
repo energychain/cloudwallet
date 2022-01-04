@@ -23,6 +23,6 @@ await instance1.set('Hello','World'); // Store a Keyvalue like a presentation
 const keys = instance1.getKeypair();
 console.log(keys);
 
-const instance2 = new Cloudwallet('<rapidAPIkey',keys.privateKey,keys.identifier);
+const instance2 = new Cloudwallet('<rapidAPIkey>',keys.privateKey,keys.identifier);
 console.log(await instance2.get('Hello'));
 ```
