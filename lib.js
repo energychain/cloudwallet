@@ -5,6 +5,7 @@ const EthrDID = require("ethr-did").EthrDID;
 const ethers = require("ethers");
 
 const cloudwallet = function(rapidAPIkey,privateKey) {
+  this._isEmpty = true;
 
   let baseURL = 'https://cloudwallet.p.rapidapi.com/';
 
@@ -39,7 +40,13 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
       registry:"0xda77BEeb5002e10be2F5B63E81Ce8cA8286D4335",
       privateKey:privateKey.privateKey
      });
-    const jwt = await ethrDid.signJWT(parent);
+    let jwt = "";
+
+    if(parent._isEmpty) {
+      jwt = await ethrDid.signJWT({});
+    } else {
+      jwt = await ethrDid.signJWT(parent);
+    }
     const settings = {
           "method":"POST",
           "url":baseURL+"cloudwallet",
@@ -49,6 +56,7 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
     for (const [key, value] of Object.entries(responds.data)) {
       parent[key] = value;
     }
+    parent._isEmpty = false;
     return responds.data;
   }
 
@@ -60,8 +68,9 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
   this.persist = async function() {
     await _call();
   }
-  
+
   this.set = async function(key,value) {
+      parent._isEmpty = false;
       parent[key] = value;
       await _call();
   }
