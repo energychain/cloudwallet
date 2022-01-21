@@ -57,6 +57,10 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
       return parent[key];
   }
 
+  this.persist = async function() {
+    await _call();
+  }
+  
   this.set = async function(key,value) {
       parent[key] = value;
       await _call();
