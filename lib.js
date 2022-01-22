@@ -46,8 +46,8 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
        data[key] = value;
      }
      delete data.privateKey;
-     
-     const jwt = await ethrDid.signJWT(parent);
+
+     const jwt = await ethrDid.signJWT(data);
 
     const settings = {
           "method":"POST",
