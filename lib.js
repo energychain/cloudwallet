@@ -38,7 +38,7 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
       rpcUrl:"https://integration.corrently.io/",
       name: "mainnet",
       chainId: "6226",
-      registry:"0xda77BEeb5002e10be2F5B63E81Ce8cA8286D4335",
+      registry:"0xaC2DDf7488C1C2Dd1f8FFE36e207D8Fb96cF2fFB",
       privateKey:parent.privateKey.privateKey
      });
      let data = {};
@@ -46,9 +46,7 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
        data[key] = value;
      }
      delete data.privateKey;
-
      const jwt = await ethrDid.signJWT(data);
-
     const settings = {
           "method":"POST",
           "url":baseURL+"cloudwallet",
@@ -60,6 +58,7 @@ const cloudwallet = function(rapidAPIkey,privateKey) {
      for (const [key, value] of Object.entries(responds.data)) {
        parent[key] = value;
      }
+     console.log('resi',responds.data);
      return responds.data;
   }
 
